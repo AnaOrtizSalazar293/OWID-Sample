@@ -21,7 +21,7 @@ country = [sub['id'] for sub in d ][1:72] + [sub['id'] for sub in d ][74:77] + [
 
 #loop to download bilateral imports of plastic scraps
 #NOTE: THIS LOOP CAN TAKE UP TO 20+ MINUTES RUNNING. READ IN THE FILE BELOW IF PREFERRED, WHICH IS THE LOOP'S OUTPUT
-#final=pd.read_csv('imports.csv')
+#final=pd.read_csv('https://raw.githubusercontent.com/AnaOrtizSalazar293/OWID-Sample/main/imports.csv')
 
 final_df=[]
 
