@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[162]:
-
-
 #Plastic Waste Bilateral Trade - Data Collection, Merging, Cleaning, and Exploratory Visualizations
 import pandas as pd
 import numpy as np
@@ -49,23 +46,7 @@ for j in country:
 final
 
 
-# In[1]:
-
-
-import pandas as pd
-import numpy as np
-import requests
-import io
-import json
-import time
-from urllib.request import urlopen
-#import from io import StringIO#
-final=pd.read_csv('imports.csv')
-
-
 # In[7]:
-
-
 #clean dataset
 #get unique values of classification column
 final['Classification'].unique()
@@ -86,11 +67,6 @@ finaldf = finaldf.rename(columns={'sub-region':'Region Reporter'})
 finaldf = pd.merge(finaldf, regionsdf[['sub-region', 'Reporter ISO']], left_on='Partner ISO', right_on = 'Reporter ISO', how='left')
 finaldf = finaldf.rename(columns={'Reporter ISO_x':'Reporter ISO', 'sub-region': 'Region Partner'})
 finaldf = finaldf.drop(['Reporter ISO_y'], axis=1)
-finaldf
-
-
-# In[14]:
-
 
 #Generate Adjacency Matrices from Edge Lists for Each Year
 edgedf = finaldf[['Region Partner','Region Reporter', 'Netweight (kg)', 'Year']]
@@ -108,7 +84,6 @@ df2016
 
 # In[5]:
 
-
 #Plotting Chord diagram with holoviews (need to install first)
 import holoviews as hv
 from holoviews import opts, dim
@@ -119,7 +94,6 @@ hv.output(size=200)
 
 
 # In[31]:
-
 
 #regenerate edge list to get same number of sources and destinations
 edge2016c = df2016.stack().reset_index()
@@ -136,21 +110,16 @@ edge2016c['Value'] = edge2016c['Value'].fillna(0).astype(np.int64)
 
 # In[33]:
 
-
 #create dataset for labels 
 
 regions= list(set(edge2016c['Source'].unique().tolist()))
 regions_df = hv.Dataset(pd.DataFrame(regions,columns=['Region']))
 
-
 # In[34]:
-
 
 get_ipython().run_cell_magic('opts', 'Chord [height=250 width=250 title="Plastic Imports" labels="Region"]', '%%opts Chord (node_color="Region" node_cmap="Category20" edge_color="Source" edge_cmap=\'Category20\')\nhv.Chord((edge2016c, regions_df))')
 
-
 # In[35]:
-
 
 #Exploratory Visualizations
 import plotly.express as px
@@ -199,7 +168,6 @@ df2016_countries_total
 
 # In[39]:
 
-
 #Networks by year
 from pyvis.network import Network
 import networkx as nx
@@ -212,17 +180,5 @@ net = Network(notebook=True, directed=True)
 net.from_nx(G)
 net.repulsion()
 net.show('g2016.html')
-
-
-# In[96]:
-
-
-#convert to scripts (.py)
-#!jupyter nbconvert --to script *.ipynb
-
-
-# In[ ]:
-
-
 
 
