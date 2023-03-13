@@ -11,7 +11,7 @@ import time
 from urllib.request import urlopen
 #import from io import StringIO#
 
-#Using 'requests' to obtain import data from UN Comtrade for the five most recent years for 100 sample countries 
+#Using 'requests' to obtain import data from UN Comtrade for the four most recent years for 100 sample countries 
 #(LIMITED TO 100 REQUESTS PER HOUR AND ONE REQUEST PER SECOND)
 
 #define country list to obtain
